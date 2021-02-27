@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Statistics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Total rounds played: ' + ${stats.getTotalGames()} " />
+<p th:text="'Total wins for player1: ' + ${stats.getTotalPlayer1Wins()} " />
+<p th:text="'Total wins for player2: ' + ${stats.getTotalPlayer2Wins()} " />
+<p th:text="'Total draws: ' + ${stats.getTotalDraws()} " />
+
+
+</body>
+</html>

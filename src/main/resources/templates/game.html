@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ciklum Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Rounds: ' + ${rounds} " />
+
+<form action="/game/start" method="GET">
+    <input type="submit" name="start" value="start" />
+</form>
+
+<form action="/game/clean" method="GET">
+    <input type="submit" name="clean" value="clean" />
+</form>
+
+<table>
+    <tr>
+        <th>Player 1</th>
+        <th>Player 2</th>
+        <th>Winner</th>
+    </tr>
+    <tr th:each="game,iterationstatus :${games}">
+        <td th:text="${game.getPlayer1()}">Player 1</td>
+        <td th:text="${game.getPlayer2()}">Player 2</td>
+        <td th:text="${game.getWinner()}">Winner</td>
+    </tr>
+</table>
+
+</body>
+</html>
