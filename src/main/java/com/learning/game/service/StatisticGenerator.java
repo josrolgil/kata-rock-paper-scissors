@@ -1,5 +1,6 @@
 package com.learning.game.service;
 
+import com.learning.game.controller.StatsController;
 import com.learning.game.model.GameRound;
 import com.learning.game.model.Result;
 import com.learning.game.model.Stats;
@@ -8,10 +9,14 @@ import net.jcip.annotations.Immutable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Service
 @Immutable
 public class StatisticGenerator implements StatisticProcessor {
+  private static final Logger LOG = LogManager.getLogger(StatisticGenerator.class);
+
   @Override
   public Stats getStats(final List<GameRound> rounds) {
     long totalGames = 0l;
@@ -31,7 +36,8 @@ public class StatisticGenerator implements StatisticProcessor {
         }
       }
     }
-
+    LOG.debug("Generating stats: totalGames={}, totalPlayer1Wins={},  totalPlayer2Wins={}, totalDraws={}",
+            totalGames, totalPlayer1Wins, totalPlayer2Wins, totalDraws);
     return new Stats(totalGames, totalPlayer1Wins, totalPlayer2Wins, totalDraws);
   }
 }

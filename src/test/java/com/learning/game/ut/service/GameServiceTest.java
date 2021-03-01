@@ -20,7 +20,7 @@ public class GameServiceTest {
     final GameRound gameRound1 = gameService.playRound();
     final GameRound gameRound2 = gameService.playRound();
     // When second gather statistics
-    final Stats stats = gameService.getStats();
+    final Stats stats = gameService.processStatistics();
 
     // Assert
     Assertions.assertNotNull(gameRound1);

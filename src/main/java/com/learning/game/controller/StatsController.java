@@ -7,15 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Controller
 @RequestMapping(value = "/stats")
 public class StatsController {
+  private static final Logger LOG = LogManager.getLogger(StatsController.class);
+
   @Autowired private GameService gameDal;
 
   @GetMapping
   public String stats(final Model model) {
-    final Stats stats = gameDal.getStats();
+    LOG.debug("Received request for stats");
+    final Stats stats = gameDal.processStatistics();
     model.addAttribute("stats", stats);
     return "stats";
   }
