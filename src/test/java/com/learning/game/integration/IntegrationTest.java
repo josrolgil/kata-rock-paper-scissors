@@ -39,24 +39,44 @@ public class IntegrationTest {
         this.mockMvc.perform(get("/game/start").sessionAttr("games", new ArrayList<>())).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Rounds: 1")))
-                .andExpect(content().string(anyOf(containsString("SCISSORS"), containsString("ROCK"), containsString("PAPER"))))
-                .andExpect(content().string(anyOf(containsString("P1"), containsString("P2"), containsString("DRAW"))));
+                .andExpect(content().string(anyOf(
+                        containsString(Player.SCISSORS.toString()),
+                        containsString(Player.ROCK.toString()),
+                        containsString(Player.PAPER.toString()))))
+                .andExpect(content().string(anyOf(
+                        containsString(Result.P1.toString()),
+                        containsString(Result.P2.toString()),
+                        containsString(Result.DRAW.toString()))));
 
         //Before cleaning, it is needed to create a session for testing purposes
         final GameRound gameRound = new GameRound(Player.ROCK, Player.ROCK, Result.DRAW);
-        this.mockMvc.perform(get("/game/clean").sessionAttr("games", new ArrayList<>(List.of(gameRound)))).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/game/clean")
+                .sessionAttr("games", new ArrayList<>(List.of(gameRound))))
+                .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Rounds: 0")))
-                .andExpect(content().string(not(containsString("SCISSORS"))))
-                .andExpect(content().string(not(containsString("ROCK"))))
-                .andExpect(content().string(not(containsString("PAPER"))))
-                .andExpect(content().string(not(containsString("P1"))))
-                .andExpect(content().string(not(containsString("P2"))))
-                .andExpect(content().string(not(containsString("DRAW"))));
+                .andExpect(content().string(not(containsString(Player.SCISSORS.toString()))))
+                .andExpect(content().string(not(containsString(Player.ROCK.toString()))))
+                .andExpect(content().string(not(containsString(Player.PAPER.toString()))))
+                .andExpect(content().string(not(containsString(Result.P1.toString()))))
+                .andExpect(content().string(not(containsString(Result.P2.toString()))))
+                .andExpect(content().string(not(containsString(Result.DRAW.toString()))));
 
         //Checking statistics
+        final String expectedStatsRounds = "<td>Total rounds played</td>\n" +
+                "                    <td>1</td>";
+        final String expectedStatsP1 ="<td>Total wins for player1</td>\n" +
+                "                    <td>1</td>";
+        final String expectedStatsP2 ="<td>Total wins for player2</td>\n" +
+                "                    <td>1</td>";
+        final String expectedStatsDraw="<td>Total draws</td>\n" +
+                "                    <td>1</td>";
         this.mockMvc.perform(get("/stats")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Total rounds played: 1")))
-                .andExpect(content().string(anyOf(containsString("Total wins for player1: 1"), containsString("Total wins for player2: 1"), containsString("Total draws: 1"))));
+                .andExpect(content().string(containsString(expectedStatsRounds)))
+                .andExpect(content().string(anyOf(
+                        containsString(expectedStatsP1),
+                        containsString(expectedStatsP2),
+                        containsString(expectedStatsDraw))));
 
     }
 }
