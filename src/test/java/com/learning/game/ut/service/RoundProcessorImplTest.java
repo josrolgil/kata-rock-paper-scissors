@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class RoundGeneratorTest {
+public class RoundProcessorImplTest {
   @Autowired private RoundProcessor roundProcessor;
 
   @DisplayName(value = "Testing the generation of game rounds")
@@ -17,7 +17,7 @@ public class RoundGeneratorTest {
   public void testGetGameRound() {
     // Given rounds
     // When
-    final GameRound gameRound = roundProcessor.processRound();
+    final GameRound gameRound = roundProcessor.playRound();
     // Assert
     Assertions.assertNotNull(gameRound);
     Assertions.assertNotNull(gameRound.getWinner());

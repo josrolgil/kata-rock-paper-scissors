@@ -1,6 +1,5 @@
 package com.learning.game.service;
 
-import com.learning.game.controller.StatsController;
 import com.learning.game.model.GameRound;
 import com.learning.game.model.Stats;
 import com.learning.game.service.interfaces.GameData;
@@ -34,7 +33,7 @@ public final class GameService {
 
   public GameRound playRound() {
     LOG.debug("GameService: playing new round");
-    final GameRound gameRound = roundProcessor.processRound();
+    final GameRound gameRound = roundProcessor.playRound();
     this.gameData.saveRoundData(gameRound);
     return gameRound;
   }

@@ -2,7 +2,7 @@ package com.learning.game.ut.service;
 
 import com.learning.game.model.Player;
 import com.learning.game.model.Result;
-import com.learning.game.service.GameReferee;
+import com.learning.game.service.gameLogic.GameReferee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

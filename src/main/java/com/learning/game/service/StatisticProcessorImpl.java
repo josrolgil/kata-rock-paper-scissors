@@ -1,6 +1,5 @@
 package com.learning.game.service;
 
-import com.learning.game.controller.StatsController;
 import com.learning.game.model.GameRound;
 import com.learning.game.model.Result;
 import com.learning.game.model.Stats;
@@ -14,8 +13,8 @@ import org.apache.logging.log4j.Logger;
 
 @Service
 @Immutable
-public class StatisticGenerator implements StatisticProcessor {
-  private static final Logger LOG = LogManager.getLogger(StatisticGenerator.class);
+public class StatisticProcessorImpl implements StatisticProcessor {
+  private static final Logger LOG = LogManager.getLogger(StatisticProcessorImpl.class);
 
   @Override
   public Stats getStats(final List<GameRound> rounds) {

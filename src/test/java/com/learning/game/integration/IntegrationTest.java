@@ -1,5 +1,6 @@
 package com.learning.game.integration;
 
+import com.learning.game.controller.ControllerPaths;
 import com.learning.game.model.GameRound;
 import com.learning.game.model.Player;
 import com.learning.game.model.Result;
@@ -12,6 +13,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.learning.game.controller.ControllerPaths.CLEAN;
+import static com.learning.game.controller.ControllerPaths.GAME;
+import static com.learning.game.controller.ControllerPaths.LIST;
+import static com.learning.game.controller.ControllerPaths.START;
+import static com.learning.game.controller.ControllerPaths.STATS;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -29,7 +35,7 @@ public class IntegrationTest {
   public void testCompleteIntegration() throws Exception {
     // Testing landing page
     this.mockMvc
-        .perform(get("/game"))
+        .perform(get(GAME))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Rounds: 0")))
@@ -39,7 +45,7 @@ public class IntegrationTest {
 
     // Starting the web. Setting session with empty list
     this.mockMvc
-        .perform(get("/game/start").sessionAttr("games", new ArrayList<>()))
+        .perform(get(GAME+START).sessionAttr("gameRounds", new ArrayList<>()))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Rounds: 1")))
@@ -61,7 +67,7 @@ public class IntegrationTest {
     // Before cleaning, it is needed to create a session for testing purposes
     final GameRound gameRound = new GameRound(Player.ROCK, Player.ROCK, Result.DRAW);
     this.mockMvc
-        .perform(get("/game/clean").sessionAttr("games", new ArrayList<>(List.of(gameRound))))
+        .perform(get(GAME+CLEAN).sessionAttr("gameRounds", new ArrayList<>(List.of(gameRound))))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Rounds: 0")))
@@ -81,7 +87,7 @@ public class IntegrationTest {
         "<td>Total wins for player2</td>\n" + "                    <td>1</td>";
     final String expectedStatsDraw = "<td>Total draws</td>\n" + "                    <td>1</td>";
     this.mockMvc
-        .perform(get("/stats"))
+        .perform(get(STATS+LIST))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().string(containsString(expectedStatsRounds)))

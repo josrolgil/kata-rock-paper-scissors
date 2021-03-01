@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col-sm">
-            <h4 th:text="'Rounds: ' + ${rounds} "/>
+            <h4 th:text="'Rounds: ' + ${roundCounter} "/>
         </div>
         <div class="col-sm">
             <form action="/game/start" method="GET">
@@ -38,7 +38,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="game,iterationstatus :${games}">
+                <tr th:each="game,iterationstatus :${gameRounds}">
                     <td th:text="${game.getPlayer1()}">Player 1</td>
                     <td th:text="${game.getPlayer2()}">Player 2</td>
                     <td th:text="${game.getWinner()}">Winner</td>

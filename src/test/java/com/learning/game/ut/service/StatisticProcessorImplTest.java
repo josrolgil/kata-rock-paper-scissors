@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootTest
-public class StatisticGeneratorTest {
+public class StatisticProcessorImplTest {
   @Autowired private StatisticProcessor statisticProcessor;
 
   private static Stream<Arguments> getRounds() {

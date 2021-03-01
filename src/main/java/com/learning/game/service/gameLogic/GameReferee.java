@@ -1,4 +1,4 @@
-package com.learning.game.service;
+package com.learning.game.service.gameLogic;
 
 import com.learning.game.model.Player;
 import com.learning.game.model.Result;
