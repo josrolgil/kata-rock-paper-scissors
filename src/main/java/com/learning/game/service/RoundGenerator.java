@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Immutable
 public class RoundGenerator implements RoundProcessor {
 
-    @Override
-    public GameRound processRound() {
-        final Player player1 = RandomHand.obtainRandomHand();
-        final Player player2 = Player.ROCK;
-        final GameReferee gameReferee = new GameReferee(player1, player2);
-        final Result result = gameReferee.judge();
-        return new GameRound(player1, player2, result);
-    }
+  @Override
+  public GameRound processRound() {
+    final Player player1 = RandomHand.obtainRandomHand();
+    final Player player2 = Player.ROCK;
+    final GameReferee gameReferee = new GameReferee(player1, player2);
+    final Result result = gameReferee.judge();
+    return new GameRound(player1, player2, result);
+  }
 }

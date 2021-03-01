@@ -7,10 +7,10 @@ import java.util.Random;
 
 @ThreadSafe
 public final class RandomHand {
-    private static final Random random = new Random();
+  private static final Random random = new Random();
 
-    public static Player obtainRandomHand() {
-        final Player[] hands = Player.values();
-        return hands[random.nextInt(hands.length)];
-    }
+  public static Player obtainRandomHand() {
+    final Player[] hands = Player.values();
+    return hands[random.nextInt(hands.length)];
+  }
 }

@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/stats")
 public class StatsController {
-    @Autowired
-    private GameService gameDal;
+  @Autowired private GameService gameDal;
 
-    @GetMapping
-    public String stats(final Model model) {
-        final Stats stats = gameDal.getStats();
-        model.addAttribute("stats", stats);
-        return "stats";
-    }
+  @GetMapping
+  public String stats(final Model model) {
+    final Stats stats = gameDal.getStats();
+    model.addAttribute("stats", stats);
+    return "stats";
+  }
 }

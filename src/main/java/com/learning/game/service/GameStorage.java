@@ -12,23 +12,23 @@ import java.util.List;
 @ThreadSafe
 @Service
 public final class GameStorage implements GameData {
-    private final List<GameRound> rounds;
+  private final List<GameRound> rounds;
 
-    public GameStorage() {
-        rounds = new ArrayList();
-    }
+  public GameStorage() {
+    rounds = new ArrayList();
+  }
 
-    @Override
-    public void saveRoundData(final GameRound game) {
-        synchronized (rounds) {
-            this.rounds.add(game);
-        }
+  @Override
+  public void saveRoundData(final GameRound game) {
+    synchronized (rounds) {
+      this.rounds.add(game);
     }
+  }
 
-    @Override
-    public List<GameRound> retrieveAllRounds() {
-        synchronized (rounds) {
-            return Collections.unmodifiableList(rounds);
-        }
+  @Override
+  public List<GameRound> retrieveAllRounds() {
+    synchronized (rounds) {
+      return Collections.unmodifiableList(rounds);
     }
+  }
 }

@@ -12,17 +12,17 @@ import java.util.List;
 
 public class GameStorageTest {
 
-    @Test
-    @DisplayName(value = "Testing game storage implementation")
-    public void testStoreData() {
-        //Given
-        final GameRound gameRound = new GameRound(Player.SCISSORS, Player.ROCK, Result.P2);
-        final GameStorage gameStorage = new GameStorage();
-        //When
-        gameStorage.saveRoundData(gameRound);
-        final List<GameRound> rounds = gameStorage.retrieveAllRounds();
-        //Assert
-        Assertions.assertEquals(1, rounds.size());
-        Assertions.assertEquals(gameRound, rounds.get(0));
-    }
+  @Test
+  @DisplayName(value = "Testing game storage implementation")
+  public void testStoreData() {
+    // Given
+    final GameRound gameRound = new GameRound(Player.SCISSORS, Player.ROCK, Result.P2);
+    final GameStorage gameStorage = new GameStorage();
+    // When
+    gameStorage.saveRoundData(gameRound);
+    final List<GameRound> rounds = gameStorage.retrieveAllRounds();
+    // Assert
+    Assertions.assertEquals(1, rounds.size());
+    Assertions.assertEquals(gameRound, rounds.get(0));
+  }
 }
