@@ -1,47 +1,38 @@
 package com.learning.game.service;
 
-import com.learning.game.model.Game;
+import com.learning.game.model.GameRound;
 import com.learning.game.model.Stats;
+import com.learning.game.service.interfaces.GameData;
+import com.learning.game.service.interfaces.RoundProcessor;
+import com.learning.game.service.interfaces.StatisticProcessor;
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @ThreadSafe
+@Service
 public final class GameService {
-    private final List<Game> games;
+    private final GameData gameData;
+    private final StatisticProcessor statisticProcessor;
+    private final RoundProcessor roundProcessor;
 
-    public GameService() {
-        games = new ArrayList<>();
+    @Autowired
+    public GameService(final GameData gameData, final StatisticProcessor statisticProcessor, final RoundProcessor roundProcessor) {
+        this.gameData = gameData;
+        this.statisticProcessor = statisticProcessor;
+        this.roundProcessor = roundProcessor;
     }
 
-    public void addGame(final Game game) {
-        synchronized (games) {
-            this.games.add(game);
-        }
+    public GameRound playRound() {
+        final GameRound gameRound = roundProcessor.processRound();
+        this.gameData.saveRoundData(gameRound);
+        return gameRound;
     }
 
     public Stats getStats() {
-        long totalGames = 0l;
-        long totalPlayer1Wins = 0l;
-        long totalPlayer2Wins = 0l;
-        long totalDraws = 0l;
-
-        synchronized (games) {
-            for (final Game game : games) {
-                totalGames++;
-                if (game.getWinner().equals(Referee.RESULTS.P1)) {
-                    totalPlayer1Wins++;
-                } else if (game.getWinner().equals(Referee.RESULTS.P2)) {
-                    totalPlayer2Wins++;
-                } else {
-                    totalDraws++;
-                }
-            }
-        }
-
-        return new Stats(
-                totalGames, totalPlayer1Wins, totalPlayer2Wins, totalDraws
-        );
+        final List<GameRound> rounds = this.gameData.retrieveAllRounds();
+        return statisticProcessor.getStats(rounds);
     }
 }

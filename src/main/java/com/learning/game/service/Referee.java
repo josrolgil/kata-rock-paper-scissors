@@ -5,13 +5,8 @@ import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class Referee {
-    public enum RESULTS {
-        P1, P2, DRAW;
-    }
-
-    private Game.PLAYER_HAND player1;
-    private Game.PLAYER_HAND player2;
-
+    private final Game.PLAYER_HAND player1;
+    private final Game.PLAYER_HAND player2;
     public Referee(final Game.PLAYER_HAND player1, final Game.PLAYER_HAND player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -35,5 +30,9 @@ public final class Referee {
         } else {
             throw new IllegalStateException("Can not determine winner");
         }
+    }
+
+    public enum RESULTS {
+        P1, P2, DRAW
     }
 }

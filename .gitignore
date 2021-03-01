@@ -23,3 +23,8 @@
 hs_err_pid*
 
 target/
+.idea/
+HELP.md
+game.iml
+mvnw.cmd
+mvnw
