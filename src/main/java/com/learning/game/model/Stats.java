@@ -36,4 +36,25 @@ public final class Stats {
   public long getTotalDraws() {
     return this.totalDraws;
   }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o == null) return false;
+    if (this.getClass() != o.getClass()) return false;
+    final Stats stats = (Stats) o;
+    return totalGames == stats.totalGames
+            && totalPlayer1Wins == stats.totalPlayer1Wins
+            && totalPlayer2Wins == stats.totalPlayer2Wins
+            && totalDraws == stats.totalDraws;
+  }
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 31 * hash + Long.hashCode(totalGames);
+    hash = 31 * hash + Long.hashCode(totalPlayer1Wins);
+    hash = 31 * hash + Long.hashCode(totalPlayer2Wins);
+    hash = 31 * hash + Long.hashCode(totalDraws);
+    return hash;
+  }
 }
