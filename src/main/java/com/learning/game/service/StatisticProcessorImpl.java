@@ -24,16 +24,13 @@ public final class StatisticProcessorImpl implements StatisticProcessor {
     long totalDraws = 0l;
 
     if (rounds != null) {
-      for (final GameRound round : rounds) {
-        totalGames++;
-        if (round.getWinner().equals(Result.P1)) {
-          totalPlayer1Wins++;
-        } else if (round.getWinner().equals(Result.P2)) {
-          totalPlayer2Wins++;
-        } else {
-          totalDraws++;
-        }
-      }
+      totalGames = rounds.size();
+      totalPlayer1Wins =
+          rounds.stream().filter(gameRound -> gameRound.getWinner().equals(Result.P1)).count();
+      totalPlayer2Wins =
+          rounds.stream().filter(gameRound -> gameRound.getWinner().equals(Result.P2)).count();
+      totalDraws =
+          rounds.stream().filter(gameRound -> gameRound.getWinner().equals(Result.DRAW)).count();
     }
     LOG.debug("Generating stats: totalGames={}, totalPlayer1Wins={},  totalPlayer2Wins={}, totalDraws={}",
             totalGames, totalPlayer1Wins, totalPlayer2Wins, totalDraws);
