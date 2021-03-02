@@ -1,6 +1,9 @@
 package com.learning.game.controller;
 
-public class ControllerPaths {
+import net.jcip.annotations.Immutable;
+
+@Immutable
+public final class ControllerPaths {
     // Game
     public static final String GAME = "/game";
     public static final String START = "/start";

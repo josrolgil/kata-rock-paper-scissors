@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 @Service
 @Immutable
-public class StatisticProcessorImpl implements StatisticProcessor {
+public final class StatisticProcessorImpl implements StatisticProcessor {
   private static final Logger LOG = LogManager.getLogger(StatisticProcessorImpl.class);
 
   @Override

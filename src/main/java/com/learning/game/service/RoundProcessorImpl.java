@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 @Service
 @Immutable
-public class RoundProcessorImpl implements RoundProcessor {
+public final class RoundProcessorImpl implements RoundProcessor {
   private static final Logger LOG = LogManager.getLogger(RoundProcessorImpl.class);
 
 

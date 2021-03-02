@@ -25,6 +25,7 @@ import static com.learning.game.controller.ControllerPaths.START;
 public class GameController {
   private static final Logger LOG = LoggerFactory.getLogger(GameController.class);
   @Autowired private GameService gameService;
+  @Autowired private RoundValidator sessionValidator;
 
   @GetMapping()
   public String landing(final Model model, final HttpSession session) {
@@ -39,7 +40,8 @@ public class GameController {
   @GetMapping(START)
   public String start(final Model model, final HttpSession session) {
     LOG.debug("Received request for starting game {}", session.getId());
-    final List<GameRound> games = (List<GameRound>) session.getAttribute("gameRounds");
+    List<GameRound> games = (List<GameRound>) session.getAttribute("gameRounds");
+    games = sessionValidator.getValidatedRounds(games);
     final GameRound newRound = gameService.playRound();
     games.add(newRound);
     session.setAttribute("gameRounds", games);

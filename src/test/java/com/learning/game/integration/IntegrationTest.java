@@ -1,6 +1,5 @@
 package com.learning.game.integration;
 
-import com.learning.game.controller.ControllerPaths;
 import com.learning.game.model.GameRound;
 import com.learning.game.model.Player;
 import com.learning.game.model.Result;
